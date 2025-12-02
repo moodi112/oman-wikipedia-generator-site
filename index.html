@@ -2,67 +2,67 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Oman Wikipedia Generator</title>
 <style>
-body { font-family: Arial, sans-serif; margin: 0; background-color: #f8f8fb; color: #1a1a1a; }
-header { background: #006b3f; color: #fff; padding: 20px; }
-header .logo { font-weight: bold; font-size: 24px; float: left; }
-header nav { float: right; }
-header nav a { color: #fff; margin-left: 15px; text-decoration: none; font-weight: 500; }
+body { font-family: Arial, sans-serif; margin: 0; background-color: #f8f8fb; color: #333; }
+header { background: #006b3f; color: #fff; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
+header .logo { font-weight: bold; font-size: 32px; }
+header nav a { color: #fff; margin-left: 15px; text-decoration: none; font-size: 16px; }
 .hero { padding: 60px 20px; text-align: center; background: #0fa780; color: #fff; }
-.hero h1 { margin: 0 0 20px 0; font-size: 32px; }
-.hero p { font-size: 18px; max-width: 700px; margin: 0 auto; }
-.features { display: flex; flex-wrap: wrap; justify-content: center; padding: 40px 20px; }
-.feature { background: #ffffff; border-radius: 8px; padding: 20px; margin: 15px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); flex: 0 0 260px; }
-.feature h3 { margin-top: 0; color: #006b3f; }
-.footer { text-align: center; padding: 20px; font-size: 14px; background: #f0f0f0; color: #666; }
-.clearfix::after { content: ""; clear: both; display: table; }
- .about { padding: 60px 20px; max-width: 800px; margin: 0 auto; }
-.about h2 { color: #006b3f; font-size: 28px; margin-bottom: 10px; }
-.about p { font-size: 16px; line-height: 1.6; color: #333333; }
-
+.hero h1 { margin: 0 0 20px 0; font-size: 36px; line-height: 1.4; }
+.hero p { font-size: 20px; max-width: 700px; margin: 0 auto 30px auto; }
+.btn { display: inline-block; background: #006b3f; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-size: 16px; }
+.btn:hover { background: #00472b; }
+.features { display: flex; flex-wrap: wrap; justify-content: center; padding: 40px 20px; gap: 30px; background: #f8f8fb; }
+.feature { flex: 1 1 220px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+.feature h3 { color: #006b3f; margin-top: 0; }
+.about { padding: 60px 20px; max-width: 800px; margin: 0 auto; }
+.about h2 { color: #006b3f; font-size: 28px; margin-bottom: 20px; }
+.about p { font-size: 16px; line-height: 1.6; margin-bottom: 20px; color: #666; }
+footer { text-align: center; padding: 20px; font-size: 14px; color: #666; }
 </style>
 </head>
 <body>
 <header class="clearfix">
- <div class="logo">Oman Wikipedia Generator</div>
- <nav>
-   <a href="#">About</a>
-   <a href="#">Features</a>
-   <a href="#">Docs</a>
-   <a href="#">Contact</a>
- </nav>
+  <div class="logo">Oman Wikipedia Generator</div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#features">Features</a>
+    <a href="#docs">Docs</a>
+    <a href="#contact">Contact</a>
+  </nav>
 </header>
-<section class="hero"><h1>Structured Data. AI-Powered Generation. Multi-language Support. Exportable Outputs.</h1>
-  <p>The AI-powered engine that turns Oman's events, venues, festivals, creators and cultural moments into clean, neutral, encyclopedia-ready articles.</p>
+<section class="hero">
+  <h1>Structured Data.<br>AI-Powered Generation.<br>Multi-language Support.<br>Exportable Outputs.</h1>
+  <p>Turn Oman's events, venues, festivals, creators and cultural moments into clean, neutral, encyclopedia-ready articles.</p>
+  <a href="#docs" class="btn">Explore the API</a>
 </section>
-<section class="features">
- <div class="feature">
-   <h3>Structured Data</h3>
-   <p>Events, venues, festivals, creators — all standardized using the OMAN EVENTS MODEL v1.0.</p>
- </div>
- <div class="feature">
-   <h3>AI-Powered</h3>
-   <p>Instant article generation based on clean metadata and cultural context.</p>
- </div>
- <div class="feature">
-   <h3>Multi-language</h3>
-   <p>English and Arabic, fully supported from the ground up.</p>
- </div>
- <div class="feature">
-   <h3>Exportable</h3>
-   <p>Download every article as PDF, Markdown, HTML, or raw JSON.</p>
- </div>
+<section id="features" class="features">
+  <div class="feature">
+    <h3>Structured Data</h3>
+    <p>Events, venues, festivals, creators and heritage — all standardized using the OMAN EVENTS MODEL v1.0 for reliable knowledge.</p>
+  </div>
+  <div class="feature">
+    <h3>AI-Powered</h3>
+    <p>Instant article generation based on clean metadata and cultural context, powered by AI grounded in Omani heritage.</p>
+  </div>
+  <div class="feature">
+    <h3>Multi-language</h3>
+    <p>English and Arabic supported from the ground up, with future plans for additional languages to reach everyone.</p>
+  </div>
+  <div class="feature">
+    <h3>Exportable</h3>
+    <p>Download every article as PDF, Markdown, HTML, or raw JSON — ready to integrate into your workflows.</p>
+  </div>
 </section>
- 
-<section class="about">
+<section id="about" class="about">
   <h2>About the Project</h2>
-  <p>The Oman Wikipedia Generator is a national cultural archive project. Using the OMAN EVENTS MODEL, it transforms structured data about events, venues, festivals, creators, and programs into neutral, encyclopedic articles. This AI-powered engine supports both English and Arabic, making Omani heritage accessible worldwide and preserving our stories for future generations.</p>
+  <p>The Oman Wikipedia Generator is a national cultural archive project. Using the Oman Events Model, it transforms structured data about events, venues, festivals, creators and heritage into comprehensive, neutral and multilingual articles that preserve our cultural legacy.</p>
+  <p>By combining structured metadata with AI, we ensure Oman’s stories are documented with precision and shared across languages and platforms.</p>
 </section>
-
-<div class="footer">
+<footer>
   © 2025 Oman Wikipedia Generator
-</div>
+</footer>
 </body>
 </html>
