@@ -1,68 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Oman Wikipedia Generator</title>
+
 <style>
-body { font-family: Arial, sans-serif; margin: 0; background-color: #f8f8fb; color: #333; }
-header { background: #006b3f; color: #fff; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
-header .logo { font-weight: bold; font-size: 32px; }
-header nav a { color: #fff; margin-left: 15px; text-decoration: none; font-size: 16px; }
-.hero { padding: 60px 20px; text-align: center; background: #0fa780; color: #fff; }
-.hero h1 { margin: 0 0 20px 0; font-size: 36px; line-height: 1.4; }
-.hero p { font-size: 20px; max-width: 700px; margin: 0 auto 30px auto; }
-.btn { display: inline-block; background: #006b3f; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-size: 16px; }
-.btn:hover { background: #00472b; }
-.features { display: flex; flex-wrap: wrap; justify-content: center; padding: 40px 20px; gap: 30px; background: #f8f8fb; }
-.feature { flex: 1 1 220px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-.feature h3 { color: #006b3f; margin-top: 0; }
-.about { padding: 60px 20px; max-width: 800px; margin: 0 auto; }
-.about h2 { color: #006b3f; font-size: 28px; margin-bottom: 20px; }
-.about p { font-size: 16px; line-height: 1.6; margin-bottom: 20px; color: #666; }
-footer { text-align: center; padding: 20px; font-size: 14px; color: #666; }
+  :root {
+    --bg-color: #f8f8fb;
+    --text-color: #333;
+    --accent-color: #006b3f;
+    --button-hover: #004e2c;
+    --card-bg: #ffffff;
+    --divider: #ddd;
+  }
+  /* Dark mode variables */
+  body.dark {
+    --bg-color: #1b1b1b;
+    --text-color: #f0f0f0;
+    --accent-color: #00b17a;
+    --button-hover: #008459;
+    --card-bg: #272727;
+    --divider: #333;
+  }
+
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+
+  header {
+    background-color: var(--accent-color);
+    padding: 20px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  header .logo {
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  header nav a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  /* Dark mode toggle button */
+  .dark-toggle {
+    margin-left: 20px;
+    background: transparent;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    padding: 6px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 80px 20px;
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .hero h1 {
+    font-size: 38px;
+    line-height: 1.3;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  .hero p {
+    font-size: 18px;
+    max-width: 650px;
+    margin: 0 auto 25px auto;
+    color: var(--text-color);
+  }
+
+  .btn {
+    display: inline-block;
+    background-color: var(--accent-color);
+    padding: 12px 26px;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 16px;
+    margin-top: 15px;
+  }
+
+  .btn:hover {
+    background-color: var(--button-hover);
+  }
+
+  .features {
+    padding: 60px 20px;
+    text-align: center;
+    background: var(--bg-color);
+  }
+
+  .features h2 {
+    font-size: 30px;
+    margin-bottom: 40px;
+    font-weight: bold;
+  }
+
+  .feature-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .feature {
+    width: 300px;
+    background: var(--card-bg);
+    padding: 22px;
+    border-radius: 8px;
+    border: 1px solid var(--divider);
+    text-align: left;
+  }
+
+  .feature h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .about {
+    padding: 60px 20px;
+    text-align: center;
+    background: var(--card-bg);
+    border-top: 1px solid var(--divider);
+  }
+
+  .about h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+  }
+
+  .about p {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text-color);
+  }
+
+  footer {
+    background: var(--accent-color);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+  }
+  footer a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: underline;
+  }
 </style>
 </head>
 <body>
-<header class="clearfix">
-  <div class="logo">Oman Wikipedia Generator</div>
+
+<header>
+  <div class="logo">🇴🇲 Oman Wikipedia Generator</div>
   <nav>
-    <a href="#about">About</a>
     <a href="#features">Features</a>
-    <a href="#docs">Docs</a>
-    <a href="#contact">Contact</a>
+    <a href="#about">About</a>
+    <a href="/openapi.json">OpenAPI</a>
+    <button class="dark-toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
   </nav>
 </header>
+
 <section class="hero">
-  <h1>Structured Data.<br>AI-Powered Generation.<br>Multi-language Support.<br>Exportable Outputs.</h1>
-  <p>Turn Oman's events, venues, festivals, creators and cultural moments into clean, neutral, encyclopedia-ready articles.</p>
-  <a href="#docs" class="btn">Explore the API</a>
+  <h1>
+    Structured Data.<br>
+    AI-Powered Generation.<br>
+    Multi-language Support.<br>
+    Exportable Outputs.
+  </h1>
+
+  <p>
+    Turn Oman's events, venues, festivals, creators, and cultural moments into clean,
+    neutral, encyclopedia-ready articles — automatically.
+  </p>
+
+  <a href="/docs" class="btn">Explore the API</a>
 </section>
-<section id="features" class="features">
-  <div class="feature">
-    <h3>Structured Data</h3>
-    <p>Events, venues, festivals, creators and heritage — all standardized using the OMAN EVENTS MODEL v1.0 for reliable knowledge.</p>
-  </div>
-  <div class="feature">
-    <h3>AI-Powered</h3>
-    <p>Instant article generation based on clean metadata and cultural context, powered by AI grounded in Omani heritage.</p>
-  </div>
-  <div class="feature">
-    <h3>Multi-language</h3>
-    <p>English and Arabic supported from the ground up, with future plans for additional languages to reach everyone.</p>
-  </div>
-  <div class="feature">
-    <h3>Exportable</h3>
-    <p>Download every article as PDF, Markdown, HTML, or raw JSON — ready to integrate into your workflows.</p>
+
+<section class="features" id="features">
+  <h2>Core Features</h2>
+
+  <div class="feature-grid">
+    <div class="feature">
+      <h3>📦 Structured Packages</h3>
+      <p>Every event, venue, or creator is archived using the OMAN-MODEL — consistent, searchable, and future-proof.</p>
+    </div>
+
+    <div class="feature">
+      <h3>🌍 Bilingual Output</h3>
+      <p>All content can be generated in both English (en) and Arabic (ar), following IETF language standards.</p>
+    </div>
+
+    <div class="feature">
+      <h3>⚙️ AI-Driven Generation</h3>
+      <p>Produce clean Wikipedia-ready articles, summaries, and infoboxes with a single API call.</p>
+    </div>
+
+    <div class="feature">
+      <h3>📤 Export Anything</h3>
+      <p>Export articles in JSON, HTML, Markdown, or PDF — ready for ministry reports or public archives.</p>
+    </div>
   </div>
 </section>
-<section id="about" class="about">
+
+<section class="about" id="about">
   <h2>About the Project</h2>
-  <p>The Oman Wikipedia Generator is a national cultural archive project. Using the Oman Events Model, it transforms structured data about events, venues, festivals, creators and heritage into comprehensive, neutral and multilingual articles that preserve our cultural legacy.</p>
-  <p>By combining structured metadata with AI, we ensure Oman’s stories are documented with precision and shared across languages and platforms.</p>
+  <p>
+    The Oman Wikipedia Generator is an AI-powered cultural documentation engine.
+    It preserves the stories of Oman — from nightlife and festivals to heritage
+    institutions and major cultural creators. Every record follows clean metadata
+    standards, ensuring long-term reliability and government-friendly neutrality.
+  </p>
 </section>
+
 <footer>
-  © 2025 Oman Wikipedia Generator
+  <p>
+    © 2025 Oman Wikipedia Generator •
+    <a href="https://github.com/moodi112/oman-wikipedia-generator-site" target="_blank">GitHub Repository</a> •
+    <a href="https://moodi112.github.io/oman-wikipedia-generator-site" target="_blank">Live Site</a>
+  </p>
 </footer>
+
+<script>
+function toggleDarkMode() {
+  document.body.classList.toggle('dark');
+}
+</script>
+
 </body>
 </html>
