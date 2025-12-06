@@ -24,11 +24,17 @@
     --divider: #333;
   }
 
+  * {
+    box-sizing: border-box;
+  }
+
   body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    scroll-behavior: smooth;
   }
 
   header {
@@ -38,80 +44,180 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  header.scrolled {
+    padding: 15px 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   }
 
   header .logo {
     font-size: 22px;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  header nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 
   header nav a {
     color: white;
-    margin-left: 20px;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+
+  header nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Mobile menu toggle */
+  .menu-toggle {
+    display: none;
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
   }
 
   /* Dark mode toggle button */
   .dark-toggle {
-    margin-left: 20px;
     background: transparent;
-    border: 1px solid #ffffff;
+    border: 2px solid #ffffff;
     color: #ffffff;
-    padding: 6px 10px;
+    padding: 8px 12px;
     cursor: pointer;
     border-radius: 4px;
     font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .dark-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .menu-toggle {
+      display: block;
+    }
+
+    header nav {
+      position: fixed;
+      top: 64px;
+      right: -100%;
+      width: 250px;
+      height: calc(100vh - 64px);
+      background-color: var(--accent-color);
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px;
+      transition: right 0.3s ease;
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    header nav.active {
+      right: 0;
+    }
+
+    header nav a {
+      width: 100%;
+      padding: 12px 16px;
+      margin: 5px 0;
+    }
+
+    .dark-toggle {
+      width: 100%;
+      margin: 10px 0;
+    }
   }
 
   .hero {
     text-align: center;
-    padding: 80px 20px;
-    background: var(--card-bg);
+    padding: 100px 20px;
+    background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-color) 100%);
     border-bottom: 1px solid var(--divider);
+    animation: fadeIn 1s ease;
   }
 
   .hero h1 {
-    font-size: 38px;
+    font-size: 48px;
     line-height: 1.3;
     font-weight: bold;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    animation: slideDown 0.8s ease;
   }
 
   .hero p {
-    font-size: 18px;
-    max-width: 650px;
-    margin: 0 auto 25px auto;
+    font-size: 20px;
+    max-width: 700px;
+    margin: 0 auto 30px auto;
     color: var(--text-color);
+    opacity: 0.9;
+    animation: slideUp 0.8s ease 0.2s backwards;
   }
 
   /* Call‑to‑action button styling */
   .btn {
     display: inline-block;
-    /* Use a subtle two‑color gradient based on the theme variables */
     background: linear-gradient(90deg, var(--accent-color), var(--button-hover));
-    padding: 14px 30px;
+    padding: 16px 36px;
     color: white;
     font-weight: bold;
-    border-radius: 6px;
+    border-radius: 8px;
     text-decoration: none;
     font-size: 18px;
     margin-top: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 107, 63, 0.3);
+    animation: slideUp 0.8s ease 0.4s backwards;
   }
 
   .btn:hover {
-    background-color: var(--button-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 107, 63, 0.4);
+  }
+
+  .btn:active {
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 32px;
+    }
+
+    .hero p {
+      font-size: 16px;
+    }
   }
 
   .features {
-    padding: 60px 20px;
+    padding: 80px 20px;
     text-align: center;
     background: var(--bg-color);
   }
 
   .features h2 {
-    font-size: 30px;
-    margin-bottom: 40px;
+    font-size: 36px;
+    margin-bottom: 50px;
     font-weight: bold;
   }
 
@@ -119,56 +225,346 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 25px;
-    max-width: 1100px;
+    gap: 30px;
+    max-width: 1200px;
     margin: 0 auto;
   }
 
   .feature {
-    width: 300px;
+    width: 320px;
     background: var(--card-bg);
-    padding: 22px;
-    border-radius: 8px;
+    padding: 30px;
+    border-radius: 12px;
     border: 1px solid var(--divider);
     text-align: left;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .feature.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .feature:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    border-color: var(--accent-color);
   }
 
   .feature h3 {
-    font-size: 22px;
-    margin-bottom: 10px;
+    font-size: 24px;
+    margin-bottom: 12px;
+    color: var(--accent-color);
   }
 
-  .about {
-    padding: 60px 20px;
-    text-align: center;
+  .feature p {
+    line-height: 1.6;
+    color: var(--text-color);
+    opacity: 0.85;
+  }
+
+  @media (max-width: 768px) {
+    .feature {
+      width: 100%;
+      max-width: 400px;
+    }
+  }
+
+  /* Interactive Demo Section */
+  .demo {
+    padding: 80px 20px;
     background: var(--card-bg);
     border-top: 1px solid var(--divider);
   }
 
-  .about h2 {
-    font-size: 28px;
+  .demo h2 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+
+  .demo-subtitle {
+    text-align: center;
+    font-size: 18px;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: 50px;
+  }
+
+  .demo-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .demo-input {
+    background: var(--bg-color);
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid var(--divider);
+  }
+
+  .demo-input h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: var(--accent-color);
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--divider);
+    border-radius: 6px;
+    background: var(--card-bg);
+    color: var(--text-color);
+    font-family: inherit;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .generate-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(90deg, var(--accent-color), var(--button-hover));
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .generate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 107, 63, 0.3);
+  }
+
+  .generate-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .demo-output {
+    background: var(--bg-color);
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid var(--divider);
+  }
+
+  .demo-output h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: var(--accent-color);
+  }
+
+  .article-preview {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid var(--divider);
+    min-height: 300px;
+    max-height: 500px;
+    overflow-y: auto;
+  }
+
+  .article-preview h4 {
+    margin-top: 0;
+    font-size: 24px;
+    border-bottom: 2px solid var(--divider);
+    padding-bottom: 10px;
     margin-bottom: 15px;
   }
 
-  .about p {
-    max-width: 700px;
-    margin: 0 auto;
-    font-size: 17px;
-    line-height: 1.6;
+  .article-preview p {
+    line-height: 1.8;
+    margin-bottom: 15px;
+  }
+
+  .loading {
+    text-align: center;
+    padding: 40px;
+    color: var(--accent-color);
+  }
+
+  .spinner {
+    border: 3px solid var(--divider);
+    border-top: 3px solid var(--accent-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .placeholder-text {
     color: var(--text-color);
+    opacity: 0.5;
+    text-align: center;
+    padding: 60px 20px;
+    font-style: italic;
+  }
+
+  @media (max-width: 968px) {
+    .demo-container {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .about {
+    padding: 80px 20px;
+    text-align: center;
+    background: var(--bg-color);
+    border-top: 1px solid var(--divider);
+  }
+
+  .about h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+
+  .about p {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--text-color);
+    opacity: 0.9;
   }
 
   footer {
     background: var(--accent-color);
     color: white;
-    padding: 20px;
+    padding: 30px 20px;
     text-align: center;
     font-size: 14px;
   }
+
   footer a {
     color: #fff;
     margin: 0 10px;
     text-decoration: underline;
+    transition: opacity 0.3s ease;
+  }
+
+  footer a:hover {
+    opacity: 0.8;
+  }
+
+  /* Back to top button */
+  .back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--accent-color);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+  }
+
+  .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .back-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Scroll reveal animation */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+  }
+
+  .scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
   }
 </style>
 </head>
@@ -176,11 +572,13 @@
 
 <header>
   <div class="logo">🇴🇲 Oman Wikipedia Generator</div>
-  <nav>
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+  <nav id="mainNav">
     <a href="#features">Features</a>
+    <a href="#demo">Demo</a>
     <a href="#about">About</a>
     <a href="/openapi.json">OpenAPI</a>
-    <button class="dark-toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    <button class="dark-toggle" onclick="toggleDarkMode()">🌓 Toggle Dark</button>
   </nav>
 </header>
 
@@ -231,6 +629,58 @@
   </div>
 </section>
 
+<section class="demo" id="demo">
+  <h2 class="scroll-reveal">Try It Yourself</h2>
+  <p class="demo-subtitle scroll-reveal">Generate a Wikipedia-style article in real-time</p>
+  
+  <div class="demo-container">
+    <div class="demo-input scroll-reveal">
+      <h3>📝 Input Details</h3>
+      
+      <div class="form-group">
+        <label for="contentType">Content Type</label>
+        <select id="contentType">
+          <option value="event">Event</option>
+          <option value="venue">Venue</option>
+          <option value="festival">Festival</option>
+          <option value="creator">Cultural Creator</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" placeholder="e.g., Muscat Festival 2025">
+      </div>
+
+      <div class="form-group">
+        <label for="language">Language</label>
+        <select id="language">
+          <option value="en">English (en)</option>
+          <option value="ar">Arabic (ar)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" placeholder="Enter a brief description..."></textarea>
+      </div>
+
+      <button class="generate-btn" onclick="generateArticle()">
+        ✨ Generate Article
+      </button>
+    </div>
+
+    <div class="demo-output scroll-reveal">
+      <h3>📄 Generated Output</h3>
+      <div class="article-preview" id="articlePreview">
+        <div class="placeholder-text">
+          👈 Fill in the details and click "Generate Article" to see the magic!
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="about" id="about">
   <h2>About the Project</h2>
   <p>
@@ -249,9 +699,272 @@
   </p>
 </footer>
 
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+
 <script>
+// Dark mode toggle with localStorage persistence
 function toggleDarkMode() {
   document.body.classList.toggle('dark');
+  const isDark = document.body.classList.contains('dark');
+  localStorage.setItem('darkMode', isDark);
+}
+
+// Load dark mode preference
+window.addEventListener('DOMContentLoaded', () => {
+  const darkMode = localStorage.getItem('darkMode') === 'true';
+  if (darkMode) {
+    document.body.classList.add('dark');
+  }
+});
+
+// Mobile menu toggle
+function toggleMenu() {
+  const nav = document.getElementById('mainNav');
+  nav.classList.toggle('active');
+}
+
+// Close mobile menu when clicking a link
+document.querySelectorAll('header nav a').forEach(link => {
+  link.addEventListener('click', () => {
+    const nav = document.getElementById('mainNav');
+    nav.classList.remove('active');
+  });
+});
+
+// Sticky header on scroll
+let lastScroll = 0;
+const header = document.querySelector('header');
+
+window.addEventListener('scroll', () => {
+  const currentScroll = window.pageYOffset;
+  
+  if (currentScroll > 100) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+  
+  lastScroll = currentScroll;
+});
+
+// Back to top button
+const backToTopBtn = document.getElementById('backToTop');
+
+window.addEventListener('scroll', () => {
+  if (window.pageYOffset > 300) {
+    backToTopBtn.classList.add('visible');
+  } else {
+    backToTopBtn.classList.remove('visible');
+  }
+});
+
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
+// Scroll reveal animation
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('revealed');
+    }
+  });
+}, observerOptions);
+
+// Observe all scroll-reveal elements
+document.querySelectorAll('.scroll-reveal').forEach(el => {
+  observer.observe(el);
+});
+
+// Animate feature cards on scroll
+const featureObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, index) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, index * 100);
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.feature').forEach(el => {
+  featureObserver.observe(el);
+});
+
+// Generate article demo function
+function generateArticle() {
+  const title = document.getElementById('title').value;
+  const contentType = document.getElementById('contentType').value;
+  const language = document.getElementById('language').value;
+  const description = document.getElementById('description').value;
+  const preview = document.getElementById('articlePreview');
+  const btn = document.querySelector('.generate-btn');
+
+  if (!title || !description) {
+    alert('Please fill in all required fields!');
+    return;
+  }
+
+  // Show loading state
+  btn.disabled = true;
+  btn.textContent = '⏳ Generating...';
+  preview.innerHTML = `
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>AI is generating your ${contentType} article...</p>
+    </div>
+  `;
+
+  // Simulate API call with timeout
+  setTimeout(() => {
+    const sampleArticle = generateSampleArticle(title, contentType, language, description);
+    preview.innerHTML = sampleArticle;
+    btn.disabled = false;
+    btn.textContent = '✨ Generate Article';
+  }, 2000);
+}
+
+function generateSampleArticle(title, type, lang, desc) {
+  const templates = {
+    event: {
+      en: `
+        <h4>${title}</h4>
+        <p><strong>${title}</strong> is a significant cultural event in Oman, representing the nation's commitment to preserving and celebrating its rich heritage.</p>
+        
+        <p><strong>Overview:</strong> ${desc}</p>
+        
+        <p><strong>History:</strong> The event has become an integral part of Oman's cultural calendar, attracting both local and international visitors who seek to experience authentic Omani culture and traditions.</p>
+        
+        <p><strong>Cultural Significance:</strong> This event plays a crucial role in promoting cultural awareness and fostering community engagement throughout the Sultanate of Oman.</p>
+        
+        <p><strong>Venue and Accessibility:</strong> The event is held in easily accessible locations, ensuring maximum participation and engagement from diverse audiences.</p>
+        
+        <p style="margin-top: 20px; padding: 10px; background: var(--bg-color); border-left: 4px solid var(--accent-color); font-size: 14px;">
+          <em>✨ This article was automatically generated using AI-powered cultural documentation.</em>
+        </p>
+      `,
+      ar: `
+        <h4 style="direction: rtl; text-align: right;">${title}</h4>
+        <p style="direction: rtl; text-align: right;"><strong>${title}</strong> هو حدث ثقافي هام في عُمان، يمثل التزام البلاد بالحفاظ على تراثها الغني والاحتفال به.</p>
+        
+        <p style="direction: rtl; text-align: right;"><strong>نظرة عامة:</strong> ${desc}</p>
+        
+        <p style="direction: rtl; text-align: right;"><strong>التاريخ:</strong> أصبح هذا الحدث جزءًا لا يتجزأ من الأجندة الثقافية العُمانية، حيث يجذب الزوار المحليين والدوليين الذين يسعون لتجربة الثقافة والتقاليد العُمانية الأصيلة.</p>
+        
+        <p style="direction: rtl; text-align: right;"><strong>الأهمية الثقافية:</strong> يلعب هذا الحدث دورًا حاسمًا في تعزيز الوعي الثقافي وتعزيز المشاركة المجتمعية في جميع أنحاء سلطنة عُمان.</p>
+        
+        <p style="direction: rtl; text-align: right; margin-top: 20px; padding: 10px; background: var(--bg-color); border-right: 4px solid var(--accent-color); font-size: 14px;">
+          <em>✨ تم إنشاء هذا المقال تلقائيًا باستخدام التوثيق الثقافي المدعوم بالذكاء الاصطناعي.</em>
+        </p>
+      `
+    },
+    venue: {
+      en: `
+        <h4>${title}</h4>
+        <p><strong>${title}</strong> is a notable venue in Oman, serving as a hub for cultural and social activities.</p>
+        
+        <p><strong>Description:</strong> ${desc}</p>
+        
+        <p><strong>Location and Access:</strong> Strategically located to serve the community, this venue offers modern facilities while respecting traditional Omani architectural values.</p>
+        
+        <p><strong>Facilities:</strong> The venue is equipped with state-of-the-art amenities to accommodate various types of events and gatherings.</p>
+        
+        <p><strong>Community Impact:</strong> This venue has become a cornerstone of local cultural life, hosting numerous events that bring the community together.</p>
+        
+        <p style="margin-top: 20px; padding: 10px; background: var(--bg-color); border-left: 4px solid var(--accent-color); font-size: 14px;">
+          <em>✨ Generated automatically using structured OMAN-MODEL data.</em>
+        </p>
+      `,
+      ar: `
+        <h4 style="direction: rtl; text-align: right;">${title}</h4>
+        <p style="direction: rtl; text-align: right;"><strong>${title}</strong> هو مكان بارز في عُمان، يعمل كمركز للأنشطة الثقافية والاجتماعية.</p>
+        
+        <p style="direction: rtl; text-align: right;"><strong>الوصف:</strong> ${desc}</p>
+        
+        <p style="direction: rtl; text-align: right;"><strong>الموقع والوصول:</strong> يقع في موقع استراتيجي لخدمة المجتمع، ويوفر هذا المكان مرافق حديثة مع احترام القيم المعمارية العُمانية التقليدية.</p>
+        
+        <p style="direction: rtl; text-align: right;"><strong>المرافق:</strong> تم تجهيز المكان بأحدث وسائل الراحة لاستيعاب أنواع مختلفة من الفعاليات والتجمعات.</p>
+        
+        <p style="direction: rtl; text-align: right; margin-top: 20px; padding: 10px; background: var(--bg-color); border-right: 4px solid var(--accent-color); font-size: 14px;">
+          <em>✨ تم إنشاؤه تلقائيًا باستخدام بيانات نموذج OMAN-MODEL المنظمة.</em>
+        </p>
+      `
+    },
+    festival: {
+      en: `
+        <h4>${title}</h4>
+        <p><strong>${title}</strong> is an annual celebration that showcases the vibrant cultural heritage of Oman.</p>
+        
+        <p><strong>About:</strong> ${desc}</p>
+        
+        <p><strong>Annual Celebration:</strong> This festival has become a beloved tradition, drawing participants from across Oman and beyond to celebrate the nation's rich cultural tapestry.</p>
+        
+        <p><strong>Activities:</strong> The festival features traditional music, dance, crafts, and culinary experiences that highlight Omani culture.</p>
+        
+        <p><strong>Tourism Impact:</strong> The festival significantly contributes to cultural tourism in Oman, promoting international understanding and appreciation of Omani traditions.</p>
+        
+        <p style="margin-top: 20px; padding: 10px; background: var(--bg-color); border-left: 4px solid var(--accent-color); font-size: 14px;">
+          <em>✨ AI-generated content following Wikipedia editorial standards.</em>
+        </p>
+      `,
+      ar: `
+        <h4 style="direction: rtl; text-align: right;">${title}</h4>
+        <p style="direction: rtl; text-align: right;"><strong>${title}</strong> هو احتفال سنوي يعرض التراث الثقافي النابض بالحياة لعُمان.</p>
+        
+        <p style="direction: rtl; text-align: right;"><strong>حول:</strong> ${desc}</p>
+        
+        <p style="direction: rtl; text-align: right;"><strong>احتفال سنوي:</strong> أصبح هذا المهرجان تقليدًا محبوبًا، يجذب المشاركين من جميع أنحاء عُمان وخارجها للاحتفال بالنسيج الثقافي الغني للبلاد.</p>
+        
+        <p style="direction: rtl; text-align: right;"><strong>الأنشطة:</strong> يتضمن المهرجان الموسيقى والرقص والحرف اليدوية والتجارب الطهوية التقليدية التي تسلط الضوء على الثقافة العُمانية.</p>
+        
+        <p style="direction: rtl; text-align: right; margin-top: 20px; padding: 10px; background: var(--bg-color); border-right: 4px solid var(--accent-color); font-size: 14px;">
+          <em>✨ محتوى تم إنشاؤه بالذكاء الاصطناعي وفقًا لمعايير التحرير في ويكيبيديا.</em>
+        </p>
+      `
+    },
+    creator: {
+      en: `
+        <h4>${title}</h4>
+        <p><strong>${title}</strong> is a recognized cultural creator contributing to Oman's artistic and cultural landscape.</p>
+        
+        <p><strong>Profile:</strong> ${desc}</p>
+        
+        <p><strong>Contributions:</strong> Through their work, this creator has significantly impacted the preservation and evolution of Omani cultural expression.</p>
+        
+        <p><strong>Recognition:</strong> The creator's efforts have been acknowledged both nationally and internationally, showcasing Omani talent on global platforms.</p>
+        
+        <p><strong>Legacy:</strong> Their work continues to inspire new generations of Omani artists and cultural practitioners.</p>
+        
+        <p style="margin-top: 20px; padding: 10px; background: var(--bg-color); border-left: 4px solid var(--accent-color); font-size: 14px;">
+          <em>✨ Automatically documented using AI-powered cultural archiving.</em>
+        </p>
+      `,
+      ar: `
+        <h4 style="direction: rtl; text-align: right;">${title}</h4>
+        <p style="direction: rtl; text-align: right;"><strong>${title}</strong> هو مبدع ثقافي معترف به يساهم في المشهد الفني والثقافي العُماني.</p>
+        
+        <p style="direction: rtl; text-align: right;"><strong>الملف الشخصي:</strong> ${desc}</p>
+        
+        <p style="direction: rtl; text-align: right;"><strong>المساهمات:</strong> من خلال عمله، أثر هذا المبدع بشكل كبير على الحفاظ على التعبير الثقافي العُماني وتطويره.</p>
+        
+        <p style="direction: rtl; text-align: right;"><strong>التقدير:</strong> تم الاعتراف بجهود المبدع على الصعيدين الوطني والدولي، مما يعرض المواهب العُمانية على المنصات العالمية.</p>
+        
+        <p style="direction: rtl; text-align: right; margin-top: 20px; padding: 10px; background: var(--bg-color); border-right: 4px solid var(--accent-color); font-size: 14px;">
+          <em>✨ موثق تلقائيًا باستخدام الأرشفة الثقافية المدعومة بالذكاء الاصطناعي.</em>
+        </p>
+      `
+    }
+  };
+
+  return templates[type][lang];
 }
 </script>
 
